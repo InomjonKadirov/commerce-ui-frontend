@@ -34,20 +34,3 @@ e2e/*.map
 .DS_Store/
 
 # End of https://www.gitignore.io/api/angular
-.gitignore
-.idea/.gitignore
-.idea/dictionaries/
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-angular.json
-commerce-ui-frontend.iml
-e2e/
-karma.conf.js
-package-lock.json
-package.json
-src/
-tsconfig.app.json
-tsconfig.json
-tsconfig.spec.json
-tslint.json
