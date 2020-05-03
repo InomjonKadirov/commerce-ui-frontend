@@ -4,24 +4,25 @@
       <div>
         <img src="assets/images/icon/search.png" (click)="openSearch()" class="img-fluid" alt="">
         <i class="ti-search" (click)="openSearch()"></i>
+<!--        <input type="text" class="ti-search" placeholder="Search Here" >-->
       </div>
     </li>
     <li class="onhover-div mobile-setting">
       <div><img src="assets/images/icon/setting.png" class="img-fluid" alt="">
         <i class="ti-settings"></i></div>
       <div class="show-div setting">
-        <h6>language</h6>
+        <h6>Язык</h6>
         <ul>
-          <li><a [routerLink]="" (click)="changeLanguage('en')">English</a> </li>
-          <li><a [routerLink]="" (click)="changeLanguage('fr')">French</a> </li>
+          <li><a [routerLink]="" (click)="changeLanguage('ru')">Русский</a> </li>
+          <li><a [routerLink]="" (click)="changeLanguage('uz')">Узбек</a> </li>
         </ul>
-        <h6 *ngIf="!productsService?.catalogMode">currency</h6>
-        <ul class="list-inline" *ngIf="!productsService?.catalogMode">
-          <li><a [routerLink]="" (click)="updateCurrency('USD')">Dollar</a> </li>
-          <li><a [routerLink]="" (click)="updateCurrency('EUR')">Euro</a> </li>
-          <li><a [routerLink]="" (click)="updateCurrency('INR')">Rupees</a> </li>
-          <li><a [routerLink]="" (click)="updateCurrency('GBP')">Pound</a> </li>
-        </ul>
+<!--        <h6 *ngIf="!productsService?.catalogMode">currency</h6>-->
+<!--        <ul class="list-inline" *ngIf="!productsService?.catalogMode">-->
+<!--          <li><a [routerLink]="" (click)="updateCurrency('USD')">Dollar</a> </li>-->
+<!--          <li><a [routerLink]="" (click)="updateCurrency('EUR')">Euro</a> </li>-->
+<!--          <li><a [routerLink]="" (click)="updateCurrency('INR')">Rupees</a> </li>-->
+<!--          <li><a [routerLink]="" (click)="updateCurrency('GBP')">Pound</a> </li>-->
+<!--        </ul>-->
       </div>
     </li>
     <li class="onhover-div mobile-cart" *ngIf="!productsService?.catalogMode">

@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
 import * as $ from 'jquery';
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HttpModule,
     BrowserAnimationsModule,
     ShopModule,
+    Ng2SearchPipeModule,
     SharedModule,
     HttpClientModule,
     NgbModule,
