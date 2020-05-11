@@ -15,6 +15,7 @@
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
     "@angular/core": "^9.0.0",
+    "@angular/fire": "^6.0.0-rc.2",
     "@angular/forms": "^9.0.0",
     "@angular/http": "^7.2.16",
     "@angular/localize": "^9.0.3",
@@ -29,6 +30,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.4",
     "exit-intent": "^1.1.0",
+    "firebase": "^7.14.3",
     "font-awesome": "^4.7.0",
     "imagesloaded": "^4.1.4",
     "isotope-fit-columns": "^1.1.4",
@@ -83,6 +85,11 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.6.2",
     "tslint": "~6.0.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "@angular-devkit/architect": "~0.900",
+    "firebase-tools": "^7.12.1",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1"
   }
 }

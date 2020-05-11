@@ -18,6 +18,11 @@ import { MainComponent } from './main/main.component';
 
 import * as $ from 'jquery';
 import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {environment} from "../environments/environment";
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireAuthModule} from "@angular/fire/auth";
+import {AngularFireAnalyticsModule} from "@angular/fire/analytics";
+import {AngularFirestoreModule} from "@angular/fire/firestore";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,6 +44,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     HttpClientModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireAnalyticsModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
