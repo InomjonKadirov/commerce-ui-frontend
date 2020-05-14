@@ -4,19 +4,19 @@ import { Component, OnInit } from '@angular/core';
 import {WindowService} from "../../shared/services/window.service";
 import * as firebase from "firebase";
 
-export class PhoneNumber {
-  country: string;
-  area: string;
-  prefix: string;
-  line: string;
-
-  // format phone numbers as E.164
-  get e164() {
-    const num = this.country + this.area + this.prefix + this.line
-    return `+${num}`
-  }
-
-}
+// export class PhoneNumber {
+//   country: string;
+//   area: string;
+//   prefix: string;
+//   line: string;
+//
+//   // format phone numbers as E.164
+//   get e164() {
+//     const num = this.country + this.area + this.prefix + this.line
+//     return `+${num}`
+//   }
+//
+// }
 
 
 @Component({
@@ -28,11 +28,26 @@ export class RegisterComponent implements OnInit {
 
   windowRef: any;
 
-  phoneNumber = new PhoneNumber()
+  phoneNumber = '+998';
 
   verificationCode: string;
 
   user: any;
+
+  // User details
+  firstName: string;
+  lastName: string;
+  password: string;
+  passwordConfirm: string;
+
+
+  passwordMustState = false;
+
+  smsCodeVerificationState = false;
+
+
+
+
 
   constructor(private win: WindowService) { }
 
@@ -48,13 +63,13 @@ export class RegisterComponent implements OnInit {
 
     const appVerifier = this.windowRef.recaptchaVerifier;
 
-    const num = this.phoneNumber.e164;
+    console.log(this.phoneNumber);
+    let num = this.phoneNumber;
 
     firebase.auth().signInWithPhoneNumber(num, appVerifier)
         .then(result => {
 
           this.windowRef.confirmationResult = result;
-
         })
         .catch( error => console.log(error) );
 
@@ -66,10 +81,20 @@ export class RegisterComponent implements OnInit {
         .then( result => {
 
           this.user = result.user;
+          this.smsCodeVerificationState = true;
 
         })
         .catch( error => console.log(error, "Incorrect code entered?"));
   }
 
+
+  checkPasswordInoutMatch() {
+
+    if (this.password === this.passwordConfirm) {
+      this.passwordMustState = false;
+    } else {
+      this.passwordMustState = true;
+    }
+  }
 
 }

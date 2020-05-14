@@ -24,67 +24,81 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h3>create account</h3>
+                <h3>Регистрация нового пользователя </h3>
                 <div class="theme-card">
-<!--                    <form class="theme-form">-->
-<!--                        <div class="form-row">-->
-<!--                            <div class="col-md-6">-->
-<!--                                <label for="email">First Name</label>-->
-<!--                                <input type="text" class="form-control" id="fname" placeholder="First Name" required="">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <label for="review">Last Name</label>-->
-<!--                                <input type="password" class="form-control" id="lname" placeholder="Last Name" required="">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="form-row">-->
-<!--                            <div class="col-md-6">-->
-<!--                                <label for="email">email</label>-->
-<!--                                <input type="text" class="form-control" id="email" placeholder="Email" required="">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <label for="review">Password</label>-->
-<!--                                <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">-->
-<!--                            </div>-->
-<!--                            <button class="btn btn-solid">create Account</button>-->
-<!--                        </div>-->
-<!--                    </form>-->
-
-
-                    <div [hidden]="user">
-                        <h1>Sign In with Your Phone Number</h1>
-
-                        <label for="phone">Phone Number</label><br>
-                        <input type="text" [(ngModel)]="phoneNumber.country"  class="input" placeholder="1"    maxlength="2">
-                        <input type="text" [(ngModel)]="phoneNumber.area"     class="input" placeholder="949"  maxlength="3">
-                        <input type="text" [(ngModel)]="phoneNumber.prefix"   class="input" placeholder="555"  maxlength="3">
-                        <input type="text" [(ngModel)]="phoneNumber.line"     class="input" placeholder="5555" maxlength="4">
-
-                        <div id="recaptcha-container"></div>
-
-                        <button (click)="sendLoginCode()">SMS Text Login Code</button>
-
-                        <div *ngIf="windowRef.confirmationResult">
-                            <hr>
-                            <label for="code">Enter your Verification Code Here</label><br>
-                            <input type="text" name="code" [(ngModel)]="verificationCode">
-
-                            <button (click)="verifyLoginCode()">Verify</button>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="firstName">Имя</label>
+                                <input type="text" [(ngModel)]="firstName" class="form-control" id="firstName" placeholder="Имя" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName">Фамилия</label>
+                                <input type="text" [(ngModel)]="lastName" class="form-control" id="lastName" placeholder="Фамилия" required="">
+                            </div>
                         </div>
 
+                        <div class="form-row" style="padding-top: 1rem">
+                            <div class="col-md-6">
+                                <label for="password">Пароль</label>
+                                <input type="password" [(ngModel)]="password" class="form-control" id="password" placeholder="Пароль" required="">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="passwordConfirm">Пароль</label>
+                                <input type="password" class="form-control" [(ngModel)]="passwordConfirm" (ngModelChange)="checkPasswordInoutMatch()" id="passwordConfirm" placeholder="Повторно введите свой пароль" required="">
+                            </div>
+                            <div *ngIf="passwordMustState">
+                                <span> Пароли не совпадают!!!!</span>
+                            </div>
+                        </div>
+
+
+                    <div class="form-row">
+                        <div class="col-md-6" style="padding-top: 1rem">
+                            <label for="phone">ВВедите свой номер и подтвердите</label>
+                            <input type="text" [(ngModel)]="phoneNumber"  class="input form-control" placeholder="998903452565"    maxlength="15">
+
+                            <div   style="padding-top: 0.5rem; padding-bottom: 0.5rem" id="recaptcha-container">
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <button class="btn btn-solid" style="margin-top: 2.35rem" (click)="sendLoginCode()">Получить код </button>
+
+                            <div *ngIf="windowRef.confirmationResult">
+                                <hr>
+                                <label for="code">Введите код подтверждение</label><br>
+                                <input type="text" class="form-control" name="code" [(ngModel)]="verificationCode">
+
+                                <button class="btn btn-solid" style="margin-top: 1rem" (click)="verifyLoginCode()">Подтвердить</button>
+                            </div>
+                        </div>
                     </div>
 
-                    <div *ngIf="user">
-                        You have successfully logged in with your phone number!
 
-                        UserId: {{ user?.uid }}
+
+                    <div class="row justify-content-end" *ngIf="smsCodeVerificationState == true" >
+                        <div class="col-md-6" style="padding-top: 1rem">
+
+                            <div>
+                                Номер подтверждён! Нажмите на кнопки сохранить!
+                            </div>
+                            <button class="btn btn-solid" style="margin-top: 1rem">Сохранить</button>
+
+                        </div>
+
+
 
                     </div>
-
-
 
 
                 </div>
+
+
+
+
+
             </div>
         </div>
     </div>
