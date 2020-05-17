@@ -1,20 +1,24 @@
 {
-  "name": "multiKart",
+  "name": "commerce-ui-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "postinstall": "ng build --aot --prod",
+    "heroku-postbuild": "ng build --prod",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.1.7",
     "@angular/cdk": "^9.2.3",
+    "@angular/cli": "^9.0.1",
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",
+    "@angular/compiler-cli": "^9.0.0",
     "@angular/core": "^9.0.0",
     "@angular/fire": "^6.0.0-rc.2",
     "@angular/forms": "^9.0.0",
@@ -33,6 +37,7 @@
     "classlist.js": "^1.1.20150312",
     "core-js": "^3.6.4",
     "exit-intent": "^1.1.0",
+    "express": "^4.17.1",
     "firebase": "^7.14.3",
     "font-awesome": "^4.7.0",
     "imagesloaded": "^4.1.4",
@@ -58,6 +63,7 @@
     "ngx-slick-carousel": "^0.4.7",
     "ngx-toastr": "^12.0.0",
     "node-sass": "^4.13.1",
+    "path": "^0.12.7",
     "popper.js": "^1.16.1",
     "primeicons": "^3.0.0-rc.1",
     "primeng": "^9.0.6",
@@ -68,10 +74,12 @@
     "sticky-kit": "^1.1.3",
     "themify-icons": "^1.0.0",
     "tslib": "^1.10.0",
+    "typescript": "^3.7.5",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "~0.900",
     "@angular-devkit/build-angular": "~0.900.1",
     "@angular/cli": "^9.0.1",
     "@angular/compiler-cli": "^9.0.0",
@@ -80,6 +88,11 @@
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "13.7.0",
     "codelyzer": "^5.1.2",
+    "enhanced-resolve": "^3.3.0",
+    "firebase-tools": "^7.12.1",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.4.1",
@@ -90,11 +103,10 @@
     "protractor": "~5.4.3",
     "ts-node": "~8.6.2",
     "tslint": "~6.0.0",
-    "typescript": "^3.7.5",
-    "@angular-devkit/architect": "~0.900",
-    "firebase-tools": "^7.12.1",
-    "fuzzy": "^0.1.3",
-    "inquirer": "^6.2.2",
-    "inquirer-autocomplete-prompt": "^1.0.1"
+    "typescript": "^3.7.5"
+  },
+  "engines": {
+    "node": "12.14.0",
+    "npm": "6.13.6"
   }
 }
