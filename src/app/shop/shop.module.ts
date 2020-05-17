@@ -58,22 +58,24 @@ import { SuccessComponent } from './product/success/success.component';
 import { ExitPopupComponent } from './product/widgets/exit-popup/exit-popup.component';
 import { AgeVerificationComponent } from './product/widgets/age-verification/age-verification.component';
 import { NewsletterComponent } from './product/widgets/newsletter/newsletter.component';
+import {ButtonModule} from "primeng";
 
 @NgModule({
   exports: [ExitPopupComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ShopRoutingModule,
-    SharedModule,
-    SlickCarouselModule,
-    BarRatingModule,
-    RangeSliderModule,
-    InfiniteScrollModule,
-    NgxPayPalModule,
-    NgxImgZoomModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ShopRoutingModule,
+        SharedModule,
+        SlickCarouselModule,
+        BarRatingModule,
+        RangeSliderModule,
+        InfiniteScrollModule,
+        NgxPayPalModule,
+        NgxImgZoomModule,
+        ButtonModule
+    ],
   declarations: [
     // Home one
     HomeComponent,
