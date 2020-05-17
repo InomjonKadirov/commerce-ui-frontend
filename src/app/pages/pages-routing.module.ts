@@ -26,6 +26,8 @@ import { MasonaryTwoGridComponent } from './portfolio/masonary-two-grid/masonary
 import { MasonaryThreeGridComponent } from './portfolio/masonary-three-grid/masonary-three-grid.component';
 import { MasonaryFourGridComponent } from './portfolio/masonary-four-grid/masonary-four-grid.component';
 import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/masonary-fullwidth.component';
+import {AuthGuard} from "../guard/auth.guard";
+import {Role} from "../shared/model/role";
 
 const routes: Routes = [
   {
@@ -89,7 +91,9 @@ const routes: Routes = [
       },
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard],
+        data: {allowedRoles: [Role.Customer]}
       },
       {
         path: 'typography',

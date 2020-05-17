@@ -3,21 +3,11 @@ import { Component, OnInit } from '@angular/core';
 // import * as firebase from 'firebase';
 import {WindowService} from "../../shared/services/window.service";
 import * as firebase from "firebase";
-
-// export class PhoneNumber {
-//   country: string;
-//   area: string;
-//   prefix: string;
-//   line: string;
-//
-//   // format phone numbers as E.164
-//   get e164() {
-//     const num = this.country + this.area + this.prefix + this.line
-//     return `+${num}`
-//   }
-//
-// }
-
+import {CustomerService} from "../../shared/services/customer.service";
+import {CustomerAddDto} from "../../shared/model/customer.add.dto";
+import {CustomerDto} from "../../shared/model/customer.dto";
+import {AuthService} from "../../auth/auth.service";
+import {AuthLoginInfo} from "../../auth/AuthLoginInfo";
 
 @Component({
   selector: 'app-register',
@@ -45,15 +35,20 @@ export class RegisterComponent implements OnInit {
 
   smsCodeVerificationState = false;
 
+  newCustomer: CustomerAddDto;
+  customerDTO: CustomerDto;
+  credentials: AuthLoginInfo;
 
 
 
-
-  constructor(private win: WindowService) { }
+  constructor(
+      private win: WindowService,
+      private customerService: CustomerService,
+      private authService: AuthService) { }
 
   ngOnInit() {
-    this.windowRef = this.win.windowRef
-    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container')
+    this.windowRef = this.win.windowRef;
+    this.windowRef.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {'size': 'invisible'});
 
     this.windowRef.recaptchaVerifier.render()
   }
@@ -97,4 +92,36 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+
+  addCustomer() {
+
+    // populating newCustomer with data
+    this.newCustomer = new CustomerAddDto(
+        this.firstName, this.lastName, this.password, this.phoneNumber
+    );
+
+
+
+    // sending to server
+    this.customerService.addCustomer(this.newCustomer)
+        .subscribe(
+            data => {
+                          console.log(JSON.stringify(data));
+                          this.customerDTO = data;
+
+                          // authenticate the customer with new credentials
+                          this.credentials = new AuthLoginInfo(data.username, this.password);
+                          this.authService.attemptAuth(this.credentials)
+                              .subscribe(value => {
+                                      console.log("Successfully authenticated");
+                              },error => {
+                                      console.log("Error authenticating");
+                              });
+
+        }, error => {
+                          alert(error);
+        });
+
+
+  }
 }

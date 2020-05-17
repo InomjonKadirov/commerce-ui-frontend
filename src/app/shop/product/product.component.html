@@ -38,5 +38,6 @@
     <ul class="color-variant" *ngIf="!productsService?.catalogMode">
       <li [class]="variant.color" (click)="changeVariantImage(variant.images)" *ngFor="let variant of product.variants"></li>
     </ul>
+    <button pButton type="button" label="Warning" class="ui-button-rounded ui-button-warning"></button>
   </div>
 </div>

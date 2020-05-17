@@ -23,6 +23,10 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {AngularFireAnalyticsModule} from "@angular/fire/analytics";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
+import {AuthInterceptor, httpInterceptorProviders} from "./auth/AuthInterceptor";
+import {AuthService} from "./auth/auth.service";
+import {ErrorInterceptor} from "./auth/ErrorInterceptor";
+import {AuthGuard} from "./guard/auth.guard";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -61,7 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     RouterModule.forRoot(rootRouterConfig, { useHash: false, anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
   ],
-  providers: [],
+  providers: [httpInterceptorProviders, AuthService, AuthInterceptor, ErrorInterceptor, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

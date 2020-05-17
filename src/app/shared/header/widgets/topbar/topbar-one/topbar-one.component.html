@@ -18,16 +18,23 @@
         <li class="onhover-dropdown mobile-account">
           <i class="fa fa-user" aria-hidden="true"></i> {{ 'my-account' | translate }}
           <ul class="onhover-show-div">
-            <li>
+            <li [hidden]="loggedIn" >
               <a [routerLink]="'/pages/login'" data-lng="ru">
                   {{ 'login' | translate }}
               </a>
             </li>
-            <li>
-              <a [routerLink]="'/home/one'" data-lng="uz">
+            <li *ngIf="loggedIn">
+              <a [routerLink]="'/home/one'" (click)="logout()" data-lng="uz">
                   {{ 'logout' | translate }}
               </a>
             </li>
+            <li *ngIf="loggedIn">
+              <a [routerLink]="'/pages/dashboard'">
+                {{ 'dashboard' | translate }}
+              </a>
+            </li>
+
+
           </ul>
         </li>
       </ul>

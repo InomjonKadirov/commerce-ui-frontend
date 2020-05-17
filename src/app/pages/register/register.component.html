@@ -23,7 +23,7 @@
 <section class="register-page section-b-space">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12" [hidden]="customerDTO">
                 <h3>Регистрация нового пользователя </h3>
                 <div class="theme-card">
                         <div class="form-row">
@@ -84,21 +84,18 @@
                             <div>
                                 Номер подтверждён! Нажмите на кнопки сохранить!
                             </div>
-                            <button class="btn btn-solid" style="margin-top: 1rem">Сохранить</button>
+                            <button class="btn btn-solid" (click)="addCustomer()"  style="margin-top: 1rem">Сохранить</button>
 
                         </div>
-
-
-
                     </div>
-
-
                 </div>
 
+            </div>
 
-
-
-
+            <div *ngIf="customerDTO">
+                <h3>
+                    New user registered successfully
+                </h3>
             </div>
         </div>
     </div>

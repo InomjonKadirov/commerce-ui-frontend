@@ -44,7 +44,7 @@
                             <li><a [routerLink]="">Newsletter</a></li>
                             <li><a [routerLink]="">My Account</a></li>
                             <li><a [routerLink]="">Change Password</a></li>
-                            <li class="last"><a [routerLink]="">Log Out</a></li>
+                            <li class="last"><a (click)="logOut()">Log Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                             <h2>My Dashboard</h2>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hello, MARK JECNO !</p>
+                            <p >Hello, {{currentCustomer?.fullName}}  !</p>
                             <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
                         </div>
                         <div class="box-account box-info">
@@ -64,57 +64,394 @@
                                 <h2>Account Information</h2>
                             </div>
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="box">
                                         <div class="box-title">
                                             <h3>Contact Information</h3>
-                                            <a [routerLink]="">Edit</a>
+                                            <a type="button" (click)="open(customerModal)">Редактировать</a>
+
+                                            <ng-template #customerModal let-modal>
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="modal-customer-edit">Обновить данные</h4>
+                                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form [formGroup]="updateCustomerForm" (ngSubmit)="onSubmitUpdateCustomer()">
+                                                    <div class="modal-body">
+                                                    <!-- Update Customer form -->
+
+
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-12">
+                                                                        <label>Full Name</label>
+                                                                        <input type="text" formControlName="fullName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }" />
+                                                                        <div *ngIf="submitted && f.fullName.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.fullName.errors.required">FullName is required</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-row">
+                                                                    <div class="form-group col-12">
+                                                                        <label>User Name</label>
+                                                                        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                                                        <div *ngIf="submitted && f.usernameName.errors" class="invalid-feedback">
+                                                                            <div *ngIf="f.username.errors.required">user Name is required</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                    </div>
+
+                                                    <div class="modal-footer text-center">
+                                                        <button type="submit" class="btn btn-primary mr-1" (click)="modal.close('Save click')" >Обновить</button>
+                                                    </div>
+                                                </form>
+
+                                            </ng-template>
+
+
                                         </div>
                                         <div class="box-content">
-                                            <h6>MARK JECNO</h6>
-                                            <h6>MARk-JECNO@gmail.com</h6>
-                                            <h6><a [routerLink]="">Change Password</a></h6>
+                                            <h6>{{currentCustomer?.fullName}}</h6>
+                                            <h6>{{currentCustomer?.username}}</h6>
+                                            <h6><a  (click)="open(passwordModal)">Изменить пароль</a></h6>
+
+                                            <ng-template #passwordModal let-modal>
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="modal-password-edit">Bootstrap Modal</h4>
+                                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <p>here will be form for changing password </p>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+                                                </div>
+                                            </ng-template>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="box">
-                                        <div class="box-title">
-                                            <h3>Newsletters</h3>
-                                            <a [routerLink]="">Edit</a>
-                                        </div>
-                                        <div class="box-content">
-                                            <p>
-                                                You are currently not subscribed to any newsletter.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="col-sm-6">-->
+<!--                                    <div class="box">-->
+<!--                                        <div class="box-title">-->
+<!--                                            <h3>Newsletters</h3>-->
+<!--                                            <a [routerLink]="">Edit</a>-->
+<!--                                        </div>-->
+<!--                                        <div class="box-content">-->
+<!--                                            <p>-->
+<!--                                                You are currently not subscribed to any newsletter.-->
+<!--                                            </p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                             <div>
                                 <div class="box">
                                     <div class="box-title">
-                                        <h3>Address Book</h3>
-                                        <a [routerLink]="">Manage Addresses</a>
+                                        <h3>Адрес</h3>
+                                        <a type="button" (click)="open(newAddressModal)">Добавить адрес</a>
+
+                                        <ng-template #newAddressModal let-modal>
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="modal-address-add">Новый адрес</h4>
+                                                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <form [formGroup]="newAddressForm" (ngSubmit)="onSubmitNewAddress()">
+                                                <div class="modal-body">
+                                                    <!-- Update Customer form -->
+
+
+                                                    <div class="form-row">
+                                                        <div class="form-group col">
+                                                            <label>Тип адреса</label>
+                                                            <select formControlName="main" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.main.errors }">
+                                                                <option value="true">Основной</option>
+                                                                <option value="false">Второй</option>
+                                                            </select>
+                                                            <div *ngIf="submitted1 && address.main.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.main.errors.required">Title is required</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Область</label>
+                                                            <input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.region.errors }" />
+                                                            <div *ngIf="submitted1 && address.region.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.region.errors.required">Region</div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-row">
+
+                                                            <div class="form-group col">
+
+                                                                <label>Город</label>
+                                                                <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.city.errors }" />
+                                                                <div *ngIf="submitted1 && address.city.errors" class="invalid-feedback">
+                                                                    <div *ngIf="address.city.errors.required">Last Name is required</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group col">
+                                                                <label>Район</label>
+                                                                <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.district.errors }" />
+                                                                <div *ngIf="submitted1 && address.district.errors" class="invalid-feedback">
+                                                                    <div *ngIf="address.district.errors.required">district is required</div>
+                                                                    <div *ngIf="address.district.errors.required">district must be a valid email address</div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+
+                                                    <div class="form-row">
+
+
+                                                        <div class="form-group col">
+                                                            <label>mahalla</label>
+                                                            <input type="text" formControlName="mahalla" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.mahalla.errors }" />
+                                                            <div *ngIf="submitted1 && address.mahalla.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.mahalla.errors.required">mahalla is required</div>
+                                                                <div *ngIf="address.mahalla.errors.required">mahalla must be a valid email address</div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col">
+                                                            <label>Улица</label>
+                                                            <input type="text" formControlName="street" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.street.errors }" />
+                                                            <div *ngIf="submitted1 && address.street.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.street.errors.required">mahalla is required</div>
+                                                                <div *ngIf="address.street.errors.required">mahalla must be a valid email address</div>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                    </div>
+
+                                                    <div class="form-row">
+
+                                                        <div class="form-group col">
+                                                            <label>Номер дома</label>
+                                                            <input type="text" formControlName="homeNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.homeNumber.errors }" />
+                                                            <div *ngIf="submitted1 && address.homeNumber.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.homeNumber.errors.required">homeNumber is required</div>
+                                                                <div *ngIf="address.homeNumber.errors.required">homeNumber must be a valid email address</div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group col">
+                                                            <label>Номер квартиры</label>
+                                                            <input type="text" formControlName="flatNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.flatNumber.errors }" />
+                                                            <div *ngIf="submitted1 && address.district.errors" class="invalid-feedback">
+                                                                <div *ngIf="address.flatNumber.errors.required">flatNumber is required</div>
+                                                                <div *ngIf="address.flatNumber.errors.required">flatNumber must be a valid email address</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="modal-footer text-center">
+                                                    <div class="text-center">
+                                                        <button type="submit"  class="btn btn-primary mr-1">Добавить</button>
+                                                        <button class="btn btn-secondary" type="reset" (click)="onReset()">Отмена</button>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+
+                                        </ng-template>
+
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <h6>Default Billing Address</h6>
-                                            <address>
-                                                You have not set a default billing address.<br>
-                                                <a [routerLink]="">Edit Address</a>
-                                            </address>
+                                            <h6>Основной адрес</h6>
+
+                                            <ul>
+                                                <li *ngFor="let addressModel of addressList; let i=index">
+
+                                                        <span>{{i}} -  {{addressModel.region}}</span>
+                                                        <span>  - {{addressModel.city}}</span>
+                                                        <span>  - {{addressModel.district}}</span>
+                                                        <span>  - {{addressModel.street}}</span>
+
+
+
+                                                        <br>
+                                                        <a type="button" (click)="openById(editAddressModal, addressModel.id)">Edit Address</a>
+<!--                                                            <ng-template #editAddressModal let-modal  >-->
+<!--                                                                <div class="modal-header">-->
+<!--                                                                    <h4 class="modal-title" id="modal-address-edit">Изменить адрес</h4>-->
+<!--                                                                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">-->
+<!--                                                                        <span aria-hidden="true">×</span>-->
+<!--                                                                    </button>-->
+<!--                                                                </div>-->
+<!--                                                                <form [formGroup]="editAddressForm" (ngSubmit)="onSubmitEditAddress()">-->
+<!--                                                                    <div class="modal-body">-->
+<!--                                                                        &lt;!&ndash; Update Customer form &ndash;&gt;-->
+
+
+<!--                                                                        <div class="form-row">-->
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>Тип адреса</label>-->
+<!--                                                                                <select formControlName="main" class="form-control" [ngClass]="{ 'is-invalid': submitted2 && address.main.errors }">-->
+<!--                                                                                    <option value="true">Основной</option>-->
+<!--                                                                                    <option value="false">Второй</option>-->
+<!--                                                                                </select>-->
+<!--                                                                                <div *ngIf="submitted1 && address.main.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.main.errors.required">Title is required</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                            <div class="form-group">-->
+<!--                                                                                <label>Область</label>-->
+<!--                                                                                <input type="text" formControlName="region" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.region.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.region.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.region.errors.required">Region</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+
+<!--                                                                        </div>-->
+
+<!--                                                                        <div class="form-row">-->
+
+<!--                                                                            <div class="form-group col">-->
+
+<!--                                                                                <label>Город</label>-->
+<!--                                                                                <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.city.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.city.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.city.errors.required">Last Name is required</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>Район</label>-->
+<!--                                                                                <input type="text" formControlName="district" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.district.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.district.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.district.errors.required">district is required</div>-->
+<!--                                                                                    <div *ngIf="address.district.errors.required">district must be a valid email address</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                        </div>-->
+
+<!--                                                                        <div class="form-row">-->
+
+
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>mahalla</label>-->
+<!--                                                                                <input type="text" formControlName="mahalla" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.mahalla.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.mahalla.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.mahalla.errors.required">mahalla is required</div>-->
+<!--                                                                                    <div *ngIf="address.mahalla.errors.required">mahalla must be a valid email address</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>Улица</label>-->
+<!--                                                                                <input type="text" formControlName="street" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.street.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.street.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.street.errors.required">mahalla is required</div>-->
+<!--                                                                                    <div *ngIf="address.street.errors.required">mahalla must be a valid email address</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+
+
+
+
+
+<!--                                                                        </div>-->
+
+<!--                                                                        <div class="form-row">-->
+
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>Номер дома</label>-->
+<!--                                                                                <input type="text" formControlName="homeNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.homeNumber.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.homeNumber.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.homeNumber.errors.required">homeNumber is required</div>-->
+<!--                                                                                    <div *ngIf="address.homeNumber.errors.required">homeNumber must be a valid email address</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+
+
+<!--                                                                            <div class="form-group col">-->
+<!--                                                                                <label>Номер квартиры</label>-->
+<!--                                                                                <input type="text" formControlName="flatNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted1 && address.flatNumber.errors }" />-->
+<!--                                                                                <div *ngIf="submitted1 && address.district.errors" class="invalid-feedback">-->
+<!--                                                                                    <div *ngIf="address.flatNumber.errors.required">flatNumber is required</div>-->
+<!--                                                                                    <div *ngIf="address.flatNumber.errors.required">flatNumber must be a valid email address</div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                        </div>-->
+
+<!--                                                                    </div>-->
+
+<!--                                                                    <div class="modal-footer text-center">-->
+<!--                                                                        <div class="text-center">-->
+<!--                                                                            <button type="submit"  class="btn btn-primary mr-1">Добавить</button>-->
+<!--                                                                            <button class="btn btn-secondary" type="reset" (click)="onReset()">Отмена</button>-->
+<!--                                                                        </div>-->
+
+<!--                                                                    </div>-->
+<!--                                                                </form>-->
+
+<!--                                                    </ng-template>-->
+                                                </li>
+
+                                            </ul>
+
                                         </div>
                                         <div class="col-sm-6">
-                                            <h6>Default Shipping Address</h6>
+                                            <h6> Shipping Address2</h6>
                                             <address>
-                                                You have not set a default shipping address.<br>
+                                                You have not set second shipping address.<br>
                                                 <a [routerLink]="">Edit Address</a>
                                             </address>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="box">
+
+                                <div class="box-title">
+                                    <h3>Добавить адрес</h3>
+                                </div>
+
+
+
+                                <button class="btn btn-lg btn-outline-primary" (click)="open(addressModal)">Новый адрес</button>
+
+                                <ng-template #addressModal let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+                                        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        This is example from ItSolutionStuff.com
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+                                    </div>
+                                </ng-template>
+
+
+
+
+                            </div>
+
                         </div>
                     </div>
                 </div>

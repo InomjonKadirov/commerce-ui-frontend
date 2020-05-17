@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiEndPoint: 'http://localhost:8090/',
   firebase: {
     apiKey: 'AIzaSyDLvCYzswnf0YANKJs2bc1qOLpJLnXRtlw',
     authDomain: 'credo-mobile.firebaseapp.com',

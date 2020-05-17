@@ -8,10 +8,6 @@ export const rootRouterConfig: Routes = [
     redirectTo: 'home/one',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'demo',
-  //   component: DemoComponent
-  // },
   {
     path: '',
     component: MainComponent,
@@ -32,7 +28,7 @@ export const rootRouterConfig: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home/one'
+    redirectTo: 'pages/404'
   }
 ];
 
