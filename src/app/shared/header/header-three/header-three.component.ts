@@ -14,6 +14,8 @@ declare var $: any;
 })
 export class HeaderThreeComponent implements OnInit, OnDestroy {
 
+  term: string;
+
    public shoppingCartItems  :   CartItem[] = [];
   
   constructor(@Inject(DOCUMENT) private document: Document,

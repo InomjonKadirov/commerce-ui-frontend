@@ -10,30 +10,65 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="main-menu border-section border-top-0">
-                    <div class="menu-left">
-                        <div class="navbar">
-                            <a (click)="openNav()">
-                                <i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
-                            </a>
-                            <div id="mySidenav" class="sidenav">
-                            <a [routerLink]="" class="sidebar-overlay" (click)="closeNav()"></a>
-                            <nav>
-                              <div (click)="closeNav()">
-                                <div class="sidebar-back text-left">
-                                  <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
+
+
+                            <div class="menu-left">
+                                <div class="navbar">
+                                    <a (click)="openNav()">
+                                        <i class="fa fa-bars sidebar-bar" aria-hidden="true"></i>
+                                    </a>
+                                    <div id="mySidenav" class="sidenav">
+                                        <a [routerLink]="" class="sidebar-overlay" (click)="closeNav()"></a>
+                                        <nav>
+                                            <div (click)="closeNav()">
+                                                <div class="sidebar-back text-left">
+                                                    <i class="fa fa-angle-left pr-2" aria-hidden="true"></i> Back
+                                                </div>
+                                            </div>
+                                            <app-left-menu></app-left-menu>
+                                        </nav>
+                                    </div>
                                 </div>
-                              </div>
-                            <app-left-menu></app-left-menu>
-                            </nav>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="brand-logo layout2-logo headerlogo">
-                        <a [routerLink]="['/home/one']"><img src="assets/images/icon/logo.png" class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="menu-right pull-right">
-                        <app-header-widgets [shoppingCartItems]="shoppingCartItems"></app-header-widgets>
-                    </div>
+                            </div>
+
+
+                            <div class="brand-logo layout2-logo headerlogo">
+                                <a [routerLink]="['/home/one']"><img src="assets/images/icon/logo.png" class="img-fluid" alt=""></a>
+
+
+                                    <input style="padding-left: 2rem; padding-right: 2rem; margin-left: 2rem; margin-right: 2rem" type="text"  pInputText placeholder="Keyword" >
+
+
+                            </div>
+
+
+
+
+<!--                            <div >-->
+
+<!--                                <input type="text" width="150rem" pInputText placeholder="Keyword">-->
+<!--                            </div>-->
+
+
+
+
+                            <div class="menu-right pull-right">
+                                <app-header-widgets [shoppingCartItems]="shoppingCartItems"></app-header-widgets>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

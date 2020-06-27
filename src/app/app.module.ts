@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
 import * as $ from 'jquery';
-import {Ng2SearchPipeModule} from "ng2-search-filter";
+
 import {environment} from "../environments/environment";
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
@@ -27,6 +27,7 @@ import {AuthInterceptor, httpInterceptorProviders} from "./auth/AuthInterceptor"
 import {AuthService} from "./auth/auth.service";
 import {ErrorInterceptor} from "./auth/ErrorInterceptor";
 import {AuthGuard} from "./guard/auth.guard";
+import {Ng2SearchPipeModule} from "ng2-search-filter";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {

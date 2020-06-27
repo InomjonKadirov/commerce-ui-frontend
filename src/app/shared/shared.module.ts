@@ -34,6 +34,8 @@ import { CategoriesComponent } from './footer/widgets/categories/categories.comp
 import { WhyWeChooseComponent } from './footer/widgets/why-we-choose/why-we-choose.component';
 import { CopyrightComponent } from './footer/widgets/copyright/copyright.component';
 import { SocialComponent } from './footer/widgets/social/social.component';
+import {ButtonModule, InputTextModule} from "primeng";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   exports: [
@@ -51,11 +53,14 @@ import { SocialComponent } from './footer/widgets/social/social.component';
     FooterFourComponent,
     OrderByPipe
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    TranslateModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        TranslateModule,
+        ButtonModule,
+        FormsModule,
+        InputTextModule
+    ],
   declarations: [
     HeaderOneComponent,
     HeaderTwoComponent,
