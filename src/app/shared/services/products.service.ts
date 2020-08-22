@@ -1,32 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
 import { BehaviorSubject, Observable, of, Subscriber} from 'rxjs';
-import { map, filter, scan } from 'rxjs/operators';
+import { map} from 'rxjs/operators';
 import 'rxjs/add/operator/map';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 // Get product from Localstorage
-let products = JSON.parse(localStorage.getItem("compareItem")) || [];
+const products = JSON.parse(localStorage.getItem('compareItem')) || [];
+
+const httpOptionsJson = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+const apiEndpoint = environment.apiEndPoint;
+
+
 
 @Injectable()
 
 export class ProductsService {
-  
-  public currency : string = 'USD';
-  public catalogMode : boolean = false;
-  
-  public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
-  public observer   :  Subscriber<{}>;
 
-  // Initialize 
-  constructor(private http: Http,private toastrService: ToastrService) { 
+  private stockProductURL = apiEndpoint + 'api/shop/stock';
+
+  public currency = 'USD';
+  public catalogMode = false;
+
+
+
+  public compareProducts: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  public observer:  Subscriber<{}>;
+
+  // Initialize
+  constructor(private  http: HttpClient, private toastrService: ToastrService) {
      this.compareProducts.subscribe(products => products = products);
   }
 
   // Observable Product Array
   private products(): Observable<Product[]> {
-     return this.http.get('assets/data/products.json').map((res:any) => res.json())
+     // return this.http.get(this.stockProductURL + '/list').map((res: any) => res.json());
+    return this.http.get<Product[]>(this.stockProductURL + '/list', httpOptionsJson );
   }
 
   // Get Products
@@ -34,24 +47,30 @@ export class ProductsService {
     return this.products();
   }
 
+
+  public  getProductListTest(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.stockProductURL + '/list', httpOptionsJson );
+  }
+
   // Get Products By Id
   public getProduct(id: number): Observable<Product> {
-    return this.products().pipe(map(items => { return items.find((item: Product) => { return item.id === id; }); }));
+    return this.products().pipe(map(items => items.find((item: Product) => item.id === id)));
   }
 
    // Get Products By category
   public getProductByCategory(category: string): Observable<Product[]> {
-    return this.products().pipe(map(items => 
+    return this.products().pipe(map(items =>
        items.filter((item: Product) => {
-         if(category == 'all')
-            return item
-         else
-            return item.category === category; 
-        
+         if (category === 'all') {
+            return item;
+         } else {
+            return item.category === category;
+         }
+
        })
      ));
   }
-  
+
    /*
       ---------------------------------------------
       ----------  Compare Product  ----------------
@@ -75,17 +94,18 @@ export class ProductsService {
 
   // Add to compare
   public addToCompare(product: Product): Product | boolean {
-    var item: Product | boolean = false;
+    let item: Product | boolean = false;
     if (this.hasProduct(product)) {
       item = products.filter(item => item.id === product.id)[0];
       const index = products.indexOf(item);
     } else {
-      if(products.length < 4)
+      if (products.length < 4) {
         products.push(product);
-      else 
-        this.toastrService.warning('Maximum 4 products are in compare.'); // toasr services
+      } else {
+        this.toastrService.warning('Maximum 4 products are in compare.');
+      } // toasr services
     }
-      localStorage.setItem("compareItem", JSON.stringify(products));
+      localStorage.setItem('compareItem', JSON.stringify(products));
       return item;
   }
 
@@ -94,7 +114,7 @@ export class ProductsService {
     if (product === undefined) { return; }
     const index = products.indexOf(product);
     products.splice(index, 1);
-    localStorage.setItem("compareItem", JSON.stringify(products));
+    localStorage.setItem('compareItem', JSON.stringify(products));
   }
-   
+
 }

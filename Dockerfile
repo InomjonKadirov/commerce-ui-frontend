@@ -1,24 +1,34 @@
-# base image
-FROM node:12.2.0
+FROM node:alpine as commerce-ui-frontend
 
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
+RUN apk update && apk add --no-cache make git
 
-# set working directory
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+COPY commerce-ui-frontend/package*.json  /app/
 
-# install and cache app dependencies
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@9.0.1
+RUN npm install @angular/cli@9.0.1 -g \
+    && npm ci
 
-# add app
-COPY . /app
+COPY commerce-ui-frontend  /app
 
-# start app
-CMD ng serve --host 0.0.0.0
+EXPOSE 4201
+
+CMD ng serve --port 4201 --host 0.0.0.0 --disable-host-check
+
+
+
+
+
+#### STAGE 1: Build ###
+#FROM node:12.7-alpine AS build
+#WORKDIR /app
+#COPY package.json package-lock.json ./
+#RUN npm install
+#COPY . .
+#RUN npm run build
+#### STAGE 2: Run ###
+#FROM nginx:1.17.1-alpine
+#COPY nginx.conf /etc/nginx/nginx.conf
+#COPY --from=build /app/dist/commerce-ui-frontend /usr/share/nginx/html
+
+

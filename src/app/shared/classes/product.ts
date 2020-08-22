@@ -34,5 +34,5 @@ export interface ColorFilter {
 
 // Tag Filter
 export interface TagFilter {
-  tag?: ProductTags
+  tag?: ProductTags;
 }

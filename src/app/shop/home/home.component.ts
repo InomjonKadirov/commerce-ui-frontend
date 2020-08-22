@@ -8,13 +8,19 @@ import { ProductsService } from '../../shared/services/products.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   public products: Product[] = [];
-  
+
   constructor(private productsService: ProductsService) {   }
 
   ngOnInit() {
-  	this.productsService.getProducts().subscribe(product => this.products = product);
+
+    // this.productsService.getProducts().subscribe(product => this.products = product);
+    this.productsService.getProductListTest().subscribe(
+        data =>  {
+                  this.products = data;
+        });
+
   }
 
 }

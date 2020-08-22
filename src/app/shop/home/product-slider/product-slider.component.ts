@@ -7,13 +7,11 @@ import { Product } from '../../../shared/classes/product';
   styleUrls: ['./product-slider.component.scss']
 })
 export class ProductSliderComponent implements OnInit {
-  
-  @Input() products: Product;
-   
+
   constructor() { }
 
-  ngOnInit() { }
-  
+  @Input() products: Product;
+
   // Slick slider config
   public productSlideConfig: any = {
     infinite: true,
@@ -45,5 +43,7 @@ export class ProductSliderComponent implements OnInit {
       }
     ]
   };
+
+  ngOnInit() { }
 
 }
