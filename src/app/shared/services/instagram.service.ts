@@ -6,7 +6,7 @@ import { Http } from '@angular/http';
 })
 export class InstagramService {
 
-  // Initialize 
+  // Initialize
   constructor(private http: Http) { }
 
   // Instagram Array

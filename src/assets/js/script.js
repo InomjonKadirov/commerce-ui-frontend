@@ -35,7 +35,7 @@ $(document).ready(function() {
     jQuery('.footer-title').on('click', function() {
       jQuery('.footer-title').removeClass('active');
       jQuery('.footer-contant').slideUp('normal');
-      if (jQuery(this).next().is(':hidden') == true) {
+      if (jQuery(this).next().is(':hidden') === true) {
         jQuery(this).addClass('active');
         jQuery(this).next().slideDown('normal');
       }
@@ -50,7 +50,7 @@ $(document).ready(function() {
     jQuery('.menu-title').on('click', function() {
       jQuery('.menu-title').removeClass('active');
       jQuery('.menu-content').slideUp('normal');
-      if (jQuery(this).next().is(':hidden') == true) {
+      if (jQuery(this).next().is(':hidden') === true) {
         jQuery(this).addClass('active');
         jQuery(this).next().slideDown('normal');
       }

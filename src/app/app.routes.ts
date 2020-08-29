@@ -5,7 +5,7 @@ import { MainComponent } from './main/main.component';
 export const rootRouterConfig: Routes = [
   {
     path: '',
-    redirectTo: 'home/one',
+    redirectTo: 'home/credo',
     pathMatch: 'full'
   },
   {

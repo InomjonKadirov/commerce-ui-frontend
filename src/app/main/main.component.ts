@@ -12,10 +12,10 @@ declare var $: any;
   providers: [ProductsService, CartService, WishlistService]
 })
 export class MainComponent implements OnInit {
-  
-  public url : any; 
 
-  constructor(private router: Router) {  
+  public url: any;
+
+  constructor(private router: Router) {
     this.router.events.subscribe((event) => {
           if (event instanceof NavigationEnd) {
             this.url = event.url;
@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  ngOnInit() { 
+  ngOnInit() {
    $.getScript('assets/js/script.js');
   }
 

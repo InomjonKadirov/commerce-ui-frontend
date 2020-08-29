@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
-import { Http, HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ShopModule } from "./shop/shop.module";
-import { SharedModule } from "./shared/shared.module";
+import { ShopModule } from './shop/shop.module';
+import { SharedModule } from './shared/shared.module';
 import { ToastrModule } from 'ngx-toastr';
 import { rootRouterConfig } from './app.routes';
 // import ngx-translate and the http loader
@@ -18,20 +18,19 @@ import { MainComponent } from './main/main.component';
 
 import * as $ from 'jquery';
 
-import {environment} from "../environments/environment";
-import {AngularFireModule} from "@angular/fire";
-import {AngularFireAuthModule} from "@angular/fire/auth";
-import {AngularFireAnalyticsModule} from "@angular/fire/analytics";
-import {AngularFirestoreModule} from "@angular/fire/firestore";
-import {AuthInterceptor, httpInterceptorProviders} from "./auth/AuthInterceptor";
-import {AuthService} from "./auth/auth.service";
-import {ErrorInterceptor} from "./auth/ErrorInterceptor";
-import {AuthGuard} from "./guard/auth.guard";
-import {Ng2SearchPipeModule} from "ng2-search-filter";
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireAnalyticsModule} from '@angular/fire/analytics';
+import {AuthInterceptor, httpInterceptorProviders} from './auth/AuthInterceptor';
+import {AuthService} from './auth/auth.service';
+import {ErrorInterceptor} from './auth/ErrorInterceptor';
+import {AuthGuard} from './guard/auth.guard';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
-   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({

@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 // Services
-import { WINDOW_PROVIDERS } from "./services/windows.service";
+import { WINDOW_PROVIDERS } from './services/windows.service';
 import { LandingFixService } from '../shared/services/landing-fix.service';
-import { InstagramService } from "./services/instagram.service";
-import { ProductsService } from "./services/products.service";
-import { WishlistService } from "./services/wishlist.service";
-import { CartService } from "./services/cart.service";
-import { OrderService } from "./services/order.service";
-import { PaginationService } from "./classes/paginate";
+import { InstagramService } from './services/instagram.service';
+import { ProductsService } from './services/products.service';
+import { WishlistService } from './services/wishlist.service';
+import { CartService } from './services/cart.service';
+import { OrderService } from './services/order.service';
+import { PaginationService } from './classes/paginate';
 // Pipes
 import { OrderByPipe } from './pipes/order-by.pipe';
 // components
-import { HeaderOneComponent } from './header/header-one/header-one.component';
-import { HeaderTwoComponent } from './header/header-two/header-two.component';
-import { HeaderThreeComponent } from './header/header-three/header-three.component';
-import { HeaderFourComponent } from './header/header-four/header-four.component';
+
 import { HeaderFiveComponent } from './header/header-five/header-five.component';
 import { LeftSidebarComponent } from './header/left-sidebar/left-sidebar.component';
 import { TopbarOneComponent } from './header/widgets/topbar/topbar-one/topbar-one.component';
@@ -34,17 +31,13 @@ import { CategoriesComponent } from './footer/widgets/categories/categories.comp
 import { WhyWeChooseComponent } from './footer/widgets/why-we-choose/why-we-choose.component';
 import { CopyrightComponent } from './footer/widgets/copyright/copyright.component';
 import { SocialComponent } from './footer/widgets/social/social.component';
-import {ButtonModule, InputTextModule} from "primeng";
-import {FormsModule} from "@angular/forms";
+import {ButtonModule, InputTextModule} from 'primeng';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   exports: [
     CommonModule,
     TranslateModule,
-    HeaderOneComponent,
-    HeaderTwoComponent,
-    HeaderThreeComponent,
-    HeaderFourComponent,
     HeaderFiveComponent,
     LeftSidebarComponent,
     FooterOneComponent,
@@ -62,10 +55,6 @@ import {FormsModule} from "@angular/forms";
         InputTextModule
     ],
   declarations: [
-    HeaderOneComponent,
-    HeaderTwoComponent,
-    HeaderThreeComponent,
-    HeaderFourComponent,
     HeaderFiveComponent,
     LeftSidebarComponent,
     FooterOneComponent,

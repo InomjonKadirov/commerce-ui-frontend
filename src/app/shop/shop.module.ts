@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShopRoutingModule } from './shop-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { BarRatingModule } from "ngx-bar-rating";
+import { BarRatingModule } from 'ngx-bar-rating';
 import { RangeSliderModule  } from 'ngx-rangeslider-component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxPayPalModule } from 'ngx-paypal';
@@ -21,7 +21,7 @@ import { BlogComponent } from './home/blog/blog.component';
 import { InstagramComponent } from './home/instagram/instagram.component';
 import { LogoComponent } from './home/logo/logo.component';
 
-// Products Components 
+// Products Components
 import { ProductComponent } from './product/product.component';
 import { ProductBoxComponent } from './product/product-box/product-box.component';
 import { ProductBoxHoverComponent } from './product/product-box-hover/product-box-hover.component';
@@ -58,7 +58,7 @@ import { SuccessComponent } from './product/success/success.component';
 import { ExitPopupComponent } from './product/widgets/exit-popup/exit-popup.component';
 import { AgeVerificationComponent } from './product/widgets/age-verification/age-verification.component';
 import { NewsletterComponent } from './product/widgets/newsletter/newsletter.component';
-import {ButtonModule} from "primeng";
+import {ButtonModule} from 'primeng';
 
 @NgModule({
   exports: [ExitPopupComponent],

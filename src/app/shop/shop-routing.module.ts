@@ -25,8 +25,8 @@ import { SuccessComponent } from './product/success/success.component';
 
 // Routes
 const routes: Routes = [
-  { 
-    path: 'one',
+  {
+    path: 'credo',
     component: HomeComponent
   },
   {
